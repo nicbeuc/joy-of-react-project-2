@@ -1,14 +1,32 @@
 import React from 'react';
-
+import Toast from '../Toast';
+import {
+  AlertOctagon,
+  AlertTriangle,
+  CheckCircle,
+  Info,
+} from 'react-feather';
 import Button from '../Button';
 
 import styles from './ToastPlayground.module.css';
 
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
+const ICONS_BY_VARIANT = {
+  notice: Info,
+  warning: AlertTriangle,
+  success: CheckCircle,
+  error: AlertOctagon,
+};
+
 
 function ToastPlayground() {
   const [message, setMessage] = React.useState('');
-  const [variant, setVariant] = React.useState('notice');
+  const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
+  const [toastPopped, setToastPopped] = React.useState(false);
+
+  function onCloseClick() {
+    setToastPopped(false);
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -16,6 +34,15 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
+
+      {toastPopped &&
+        <Toast
+          message={message}
+          variant={variant}
+          onCloseClick={onCloseClick}
+          Icon={ICONS_BY_VARIANT[variant]}
+        />
+      }
 
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>
@@ -67,7 +94,13 @@ function ToastPlayground() {
           <div
             className={`${styles.inputWrapper} ${styles.radioWrapper}`}
           >
-            <Button>Pop Toast!</Button>
+            <Button
+              onClick={(e) => {
+                setToastPopped(true);
+              }}
+            >
+              Pop Toast!
+            </Button>
           </div>
         </div>
       </div>
