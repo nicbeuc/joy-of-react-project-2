@@ -27,6 +27,11 @@ function ToastPlayground() {
     setVariant(VARIANT_OPTIONS[0]);
   }
 
+  function handleCloseClick(id) {
+    const newToastList = toastList.filter((toast) => toast.id !== id);
+    setToastList(newToastList);
+  }
+
   return (
     <div className={styles.wrapper}>
       <header>
@@ -34,7 +39,7 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <ToastShelf toastList={toastList} setToastList={setToastList}/>
+      <ToastShelf toastList={toastList} handleCloseClick={handleCloseClick}/>
 
       <form onSubmit={handleFormSubmit}>
         <div className={styles.controlsWrapper}>

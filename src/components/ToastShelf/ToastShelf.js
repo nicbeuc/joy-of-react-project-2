@@ -15,12 +15,7 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function ToastShelf({toastList, setToastList}) {
-  function handleCloseClick(id) {
-    const newToastList = toastList.filter((toast) => toast.id !== id);
-    setToastList(newToastList);
-  }
-
+function ToastShelf({toastList, handleCloseClick}) {
   return (
     <ol className={styles.wrapper}>
       {toastList.map(({id, message, variant}) => (
