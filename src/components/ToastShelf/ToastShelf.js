@@ -16,14 +16,14 @@ const ICONS_BY_VARIANT = {
 };
 
 function ToastShelf({toastList, setToastList}) {
-  function handleCloseClick(index) {
-    const newToastList = toastList.filter((_, i) => i !== index);
+  function handleCloseClick(id) {
+    const newToastList = toastList.filter((toast) => toast.id !== id);
     setToastList(newToastList);
   }
 
   return (
     <ol className={styles.wrapper}>
-      {toastList.map(({id, message, variant}, index) => (
+      {toastList.map(({id, message, variant}) => (
         <li
           key={id}
           className={styles.toastWrapper}
@@ -32,7 +32,7 @@ function ToastShelf({toastList, setToastList}) {
             message={message}
             variant={variant}
             Icon={ICONS_BY_VARIANT[variant]}
-            onCloseClick={() => handleCloseClick(index)}
+            onCloseClick={() => handleCloseClick(id)}
           />
         </li>
       ))}
