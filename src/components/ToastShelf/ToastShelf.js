@@ -6,6 +6,8 @@ import {
   Info,
 } from 'react-feather';
 import Toast from '../Toast';
+import { ToastContext } from '../ToastProvider/ToastProvider';
+
 import styles from './ToastShelf.module.css';
 
 const ICONS_BY_VARIANT = {
@@ -15,7 +17,9 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function ToastShelf({toastList, handleCloseClick}) {
+function ToastShelf() {
+  const {toastList, handleCloseClick} = React.useContext(ToastContext);
+
   return (
     <ol className={styles.wrapper}>
       {toastList.map(({id, message, variant}) => (
