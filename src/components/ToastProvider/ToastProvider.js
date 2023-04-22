@@ -9,6 +9,15 @@ function ToastProvider({children}) {
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
   const [toastList, setToastList] = React.useState([]);
 
+  React.useEffect(() => {
+    if (toastList.length === 0) return;
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        setToastList([]);
+      }
+    });
+  }, [toastList])
+
   function handleFormSubmit(e) {
     e.preventDefault();
     if (message.length < 1) return;
