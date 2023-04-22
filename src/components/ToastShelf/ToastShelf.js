@@ -21,7 +21,12 @@ function ToastShelf() {
   const {toastList, handleCloseClick} = React.useContext(ToastContext);
 
   return (
-    <ol className={styles.wrapper}>
+    <ol
+      className={styles.wrapper}
+      role='region'
+      aria-live='polite'
+      aria-label='Notification'
+    >
       {toastList.map(({id, message, variant}) => (
         <li
           key={id}
