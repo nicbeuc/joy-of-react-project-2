@@ -1,4 +1,5 @@
 import React from "react";
+import useEscapeKey from "../../hooks/useEscapeKey";
 
 export const ToastContext = React.createContext();
 
@@ -9,14 +10,9 @@ function ToastProvider({children}) {
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
   const [toastList, setToastList] = React.useState([]);
 
-  React.useEffect(() => {
-    if (toastList.length === 0) return;
-    window.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        setToastList([]);
-      }
-    });
-  }, [toastList])
+  useEscapeKey(() => {
+    setToastList([]);
+  })
 
   function handleFormSubmit(e) {
     e.preventDefault();
